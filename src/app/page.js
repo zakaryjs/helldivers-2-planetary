@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
+import Card from "./components/Card";
 
 export default function Home() {
 
@@ -24,14 +25,7 @@ export default function Home() {
       <h2 className="text-3xl mt-4">Currently Active Planets:</h2>
       {currentPlanets.map(planet => (
                         <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[50%]">
-                          <p className="text-3xl mt-4">{planet.name}</p>
-                          <p className="text-2xl">{planet.faction}</p>
-                          <p className="text-2xl">{planet.biome.description}</p>
-                          <div className="w-[80%] h-[1.5rem] bg-white mt-4">
-                            <div className="bg-black h-full" style={{width: `${planet.percentage}%`}}>
-                            </div>
-                          </div>
-                          <p className="text-2xl mt-4">{planet.percentage}% Liberated</p>
+                          <Card planet={planet} />
                         </div>
                     ))}
     </main>

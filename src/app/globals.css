@@ -7,6 +7,30 @@ body {
   background: #202424;
 }
 
+.Automatons {
+  background-color: #e75555;
+  height: 1.5rem;
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.Super-Earth {
+  background-color: rgb(86, 150, 238);
+  height: 100%;
+}
+
+.Terminids {
+  background-color: #eab31a;
+  height: 1.5rem;
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.Card {
+  background-color: #FFE80A;
+  color: black;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
