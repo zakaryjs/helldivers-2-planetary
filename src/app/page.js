@@ -15,6 +15,10 @@ export default function Home() {
   }
 
   useEffect(() => {
+    fetchCurrentPlanets()
+  }, [])
+
+  useEffect(() => {
     const interval = setInterval(fetchCurrentPlanets, 20000)
 
     return () => {
