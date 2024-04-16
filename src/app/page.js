@@ -24,7 +24,7 @@ export default function Home() {
       <h2 className="text-4xl text-center mt-4">Stay up-to-date with the war effort from the sidelines! View the planets that are currently being liberated and plan your next move to assist your fellow Helldivers.</h2>
       <h2 className="text-3xl mt-4">Currently Active Planets:</h2>
       {currentPlanets.map(planet => (
-                        <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[50%]">
+                        <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[50%] relative">
                           <Card planet={planet} />
                         </div>
                     ))}

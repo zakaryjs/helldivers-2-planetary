@@ -27,8 +27,16 @@ body {
 }
 
 .Card {
+  margin-top: 0.75rem;
   background-color: #FFE80A;
   color: black;
+  border-radius: 5px;
+  border: 2px solid #e9ae19;
+}
+
+.Card-Image {
+  position: absolute;
+  right: 2px;
 }
 
 @layer utilities {
