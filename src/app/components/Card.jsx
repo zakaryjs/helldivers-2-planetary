@@ -11,7 +11,7 @@ export default function Card( {planet} ) {
                 <div className="Super-Earth" style={{width: `${planet.percentage}%`}}>
                 </div>
             </div>
-            <p className="text-2xl mt-4">{planet.percentage}% Liberated</p>
+            <p className="text-2xl mt-4">{planet.percentage.toFixed(2)}% Liberated</p>
         </div>
     )
 }
