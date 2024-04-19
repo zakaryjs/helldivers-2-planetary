@@ -14,6 +14,9 @@ export default function Home() {
   const [allPlanets, setAllPlanets] = useState([])
   const [currentPlanets, setCurrentPlanets] = useState([])
   const [currentMajorOrders, setCurrentMajorOrders] = useState(placeholder)
+  const [warStatus, setWarStatus] = useState({})
+  const [time, setTime] = useState(0)
+  const [news, setNews] = useState([])
 
   async function fetchAllPlanets() {
     const request = await fetch('https://helldiverstrainingmanual.com/api/v1/planets')
@@ -31,15 +34,30 @@ export default function Home() {
   async function fetchCurrentMajorOrders() {
     const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/major-orders')
     const response = await request.json()
-    console.log(response)
     if (currentMajorOrders.length > 1) {
       setCurrentMajorOrders(response)
     }
   }
 
+  async function fetchCurrentWarStatus() {
+    const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/status')
+    const response = await request.json()
+    setWarStatus(response)
+    setTime(response.time - 100000)
+  }
+
+  async function fetchCurrentNews() {
+    const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/news?from=' + time)
+    const response = await request.json()
+    setNews(response)
+  }
+
   useEffect(() => {
     fetchCurrentPlanets()
     fetchAllPlanets()
+    fetchCurrentWarStatus()
+    fetchCurrentMajorOrders()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -51,19 +69,11 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    fetchCurrentMajorOrders()
-  }, [])
-
-  useEffect(() => {
-    console.log(currentMajorOrders)
-    // console.log(currentMajorOrders[0].setting)
-    // if (currentMajorOrders.length < 1) {
-    //   setCurrentMajorOrders([{
-    //     order: 'Stand by for further orders from Super Earth High Command.'
-    //   }])
-    // }
+    if (time > 0) {
+      fetchCurrentNews()
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentMajorOrders])
+  }, [time])
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -77,6 +87,13 @@ export default function Home() {
           {currentMajorOrders[0].setting.overrideBrief && <p className="text-2xl mt-5">{order.setting.overrideBrief}</p>}
           {currentMajorOrders[0].setting.tasks?.values[2] && <p className="text-2xl mt-5">Affected Planets:</p>}
           {currentMajorOrders[0].setting.tasks?.values[2] && <p className="text-2xl mt-5">{allPlanets[order.setting.tasks[0].values[2]].name}</p>}
+        </div>
+      ))}
+
+      <h3 className="text-3xl mt-4">Current News:</h3>
+      {news.map(article => (
+        <div key={article.id} className="flex flex-col items-center text-center">
+          <p className="text-2xl mt-5">{article.message.replace(/<.*?>/g, "".replace(/\n/g, ""))}</p>
         </div>
       ))}
       
