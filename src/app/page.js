@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
+import Header from "./components/Header";
 
 export default function Home() {
 
@@ -88,12 +89,15 @@ export default function Home() {
       <h1 className="text-5xl">Helldivers 2 Planetary</h1>
       <h2 className="text-4xl text-center mt-4">Stay up-to-date with the war effort from the sidelines! View the planets that are currently being liberated and plan your next move to assist your fellow Helldivers.</h2>
       
-      <h3 className="text-3xl mt-4">Live Stats:</h3>
-      {Object.keys(stats).map((item, i) => (
-        <p className="text-2xl" key={i}>{item}: {stats[item]}</p>
-      ))}
+      <Header title={'Live Stats'} />
+      {stats.missionsWon && <p className="text-2xl mt-4"> Total Missions Won: {stats.missionsWon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>}
+      {stats.missionsWon && <p className="text-2xl mt-4">Total Missions Lost: {stats.missionsLost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>}
+      {stats.missionsWon && <p className="text-2xl mt-4">Mission Success Rate: {stats.missionSuccessRate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%</p>}
+      {stats.missionsWon && <p className="text-2xl mt-4">Automaton Kills: {stats.automatonKills.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>}
+      {stats.missionsWon && <p className="text-2xl mt-4">Terminid Kills: {stats.bugKills.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>}
+      {/* <p>Illuminate Kills: {stats.illuminateKills.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p> */}
 
-      <h3 className="text-3xl mt-4">Current Major Orders:</h3>
+      <Header title={'Current Major Orders'} />
       {currentMajorOrders.map(order => (
         <div key={Math.random()} className="mb-4 flex flex-col items-center text-center w-[50%]">
           {currentMajorOrders[0].setting.overrideTitle && <p className="text-2xl mt-5">{order.setting.overrideTitle}</p>}
@@ -103,14 +107,14 @@ export default function Home() {
         </div>
       ))}
 
-      <h3 className="text-3xl mt-4">Current News:</h3>
+      <Header title={'Latest News'} />
       {news.map(article => (
         <div key={article.id} className="flex flex-col items-center text-center">
           {article.message && <p className="text-2xl mt-5">{article.message.replace(/<.*?>/g, "").replace(/\n/g, "").replace(/WON/g, "WON: ").replace(/ORDER/g, "ORDER: ").replace(/BRIEF/g, "BRIEF: ")}</p>}
         </div>
       ))}
       
-      <h2 className="text-3xl mt-4">Currently Active Planets:</h2>
+      <Header title={'Currently Active Planets'} />
       {currentPlanets.map(planet => (
                         <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[50%] relative">
                           <Card planet={planet} />
