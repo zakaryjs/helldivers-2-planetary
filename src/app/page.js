@@ -93,7 +93,7 @@ export default function Home() {
       <h3 className="text-3xl mt-4">Current News:</h3>
       {news.map(article => (
         <div key={article.id} className="flex flex-col items-center text-center">
-          <p className="text-2xl mt-5">{article.message.replace(/<.*?>/g, "".replace(/\n/g, ""))}</p>
+          {article.message && <p className="text-2xl mt-5">{article.message.replace(/<.*?>/g, "").replace(/\n/g, "").replace(/WON/g, "WON: ").replace(/ORDER/g, "ORDER: ").replace(/BRIEF/g, "BRIEF: ")}</p>}
         </div>
       ))}
       
