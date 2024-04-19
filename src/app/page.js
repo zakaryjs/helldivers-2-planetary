@@ -17,6 +17,7 @@ export default function Home() {
   const [warStatus, setWarStatus] = useState({})
   const [time, setTime] = useState(0)
   const [news, setNews] = useState([])
+  const [stats, setStats] = useState({})
 
   async function fetchAllPlanets() {
     const request = await fetch('https://helldiverstrainingmanual.com/api/v1/planets')
@@ -52,11 +53,18 @@ export default function Home() {
     setNews(response)
   }
 
+  async function fetchStats() {
+    const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/stats')
+    const response = await request.json()
+    setStats(response)
+  }
+
   useEffect(() => {
     fetchCurrentPlanets()
     fetchAllPlanets()
     fetchCurrentWarStatus()
     fetchCurrentMajorOrders()
+    fetchStats()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -80,6 +88,11 @@ export default function Home() {
       <h1 className="text-5xl">Helldivers 2 Planetary</h1>
       <h2 className="text-4xl text-center mt-4">Stay up-to-date with the war effort from the sidelines! View the planets that are currently being liberated and plan your next move to assist your fellow Helldivers.</h2>
       
+      <h3 className="text-3xl mt-4">Live Stats:</h3>
+      {Object.keys(stats).map((item, i) => (
+        <p className="text-2xl" key={i}>{item}: {stats[item]}</p>
+      ))}
+
       <h3 className="text-3xl mt-4">Current Major Orders:</h3>
       {currentMajorOrders.map(order => (
         <div key={Math.random()} className="mb-4 flex flex-col items-center text-center w-[50%]">
