@@ -36,7 +36,7 @@ export default function Home() {
   async function fetchCurrentMajorOrders() {
     const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/major-orders')
     const response = await request.json()
-    if (currentMajorOrders.length > 1) {
+    if (currentMajorOrders.length > 0) {
       setCurrentMajorOrders(response)
     }
   }
@@ -109,6 +109,7 @@ export default function Home() {
           <div key={Math.random()} className="mb-4 flex flex-col items-center text-center">
             {currentMajorOrders[0].setting.overrideTitle && <p className="text-2xl mt-5">{order.setting.overrideTitle}</p>}
             {currentMajorOrders[0].setting.overrideBrief && <p className="text-2xl mt-5">{order.setting.overrideBrief}</p>}
+            {currentMajorOrders[0].setting.taskDescription && <p className="text-2xl mt-5">{order.setting.taskDescription}</p>}
             {currentMajorOrders[0].setting.tasks?.values[2] && <p className="text-2xl mt-5">Affected Planets:</p>}
             {currentMajorOrders[0].setting.tasks?.values[2] && <p className="text-2xl mt-5">{allPlanets[order.setting.tasks[0].values[2]].name}</p>}
           </div>
