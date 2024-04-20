@@ -119,7 +119,7 @@ export default function Home() {
       <section className="flex flex-col items-center" id="news">
         <Header title={'Latest News'} />
         {news.map(article => (
-          <div key={article.id} className="flex flex-col items-center text-center w-[50%]">
+          <div key={article.id} className="flex flex-col items-center text-center w-[80%]">
             {article.message && <p className="text-2xl mt-5">{article.message.replace(/<.*?>/g, "").replace(/\n/g, "").replace(/WON/g, "WON: ").replace(/ORDER/g, "ORDER: ").replace(/BRIEF/g, "BRIEF: ")}</p>}
           </div>
         ))}
@@ -128,7 +128,7 @@ export default function Home() {
       <section className="flex flex-col items-center mt-4" id="planets">
         <Header title={'Currently Active Planets'} />
         {currentPlanets.map(planet => (
-                        <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[50%] relative">
+                        <div key={planet.planetIndex} className="mb-4 flex flex-col items-center text-center w-[80%] relative">
                           <Card planet={planet} />
                         </div>
                     ))}
