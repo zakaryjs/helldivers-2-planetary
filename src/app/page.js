@@ -115,7 +115,7 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="flex flex-col items-center mt-4" id="news">
+      <section className="flex flex-col items-center" id="news">
         <Header title={'Latest News'} />
         {news.map(article => (
           <div key={article.id} className="flex flex-col items-center text-center w-[50%]">
