@@ -45,7 +45,7 @@ export default function Home() {
     const request = await fetch('https://helldiverstrainingmanual.com/api/v1/war/status')
     const response = await request.json()
     setWarStatus(response)
-    setTime(response.time - 100000)
+    setTime(response.time - 345600)
   }
 
   async function fetchCurrentNews() {
